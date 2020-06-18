@@ -1,0 +1,3 @@
+C:/Users/Krisna Dhipa/Documents/GitHub/Task2_C/cmake-build-debug/CMakeFiles/Task2_C.dir
+C:/Users/Krisna Dhipa/Documents/GitHub/Task2_C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Krisna Dhipa/Documents/GitHub/Task2_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
