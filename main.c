@@ -1,8 +1,20 @@
+
+/****************************************************************
+ * Author           : Achmad Fadhitya Muharram                  *
+ * NIM              : 2301974231                                *
+ * Mata Kuliah      : Algorithm and Programming                 *
+ * Nama Program     : Aplikasi Input Nilai dan Data Mahasiswa   *
+ ****************************************************************/
+
+/************* List of To-Do **************
+ * - TODO create validation
+ ******************************************/
+
 #include <stdio.h>
-//#include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 
+// --- Awal deklarasi tipe data komposit (struct) global ---
 typedef struct {
     char namaMataKuliah[255];
     float nilaiHadir;
@@ -20,43 +32,36 @@ typedef struct {
     Matakuliah listMatakuliah[100];
     int totalMatakuliahYangDiambil;
 } Mahasiswa ;
+// --- Akhir deklarasi tipe data komposit (struct) global ---
 
+
+// --- Awal deklarasi variable global ---
 Mahasiswa arrayMahasiswa[100];
 int lastItemOfArrayMahasiswa = 0;
+// --- Akhir deklarasi variable global ---
 
 
-void inputNamaMatakuliah(Mahasiswa *ptr);
-
-void showNilaiMahasiswaTertentu(Mahasiswa param);
-
-void inputNilaiMataKuliahTertentu(Matakuliah *param);
-
-void hitungNilaiAkhir(Matakuliah *matakuliah);
-
-void tentukanStatusGrade(Matakuliah *matakuliah);
-
-Matakuliah *getMataKuliahYangAkanDiinputNilai(Mahasiswa *ptr);
-
-Mahasiswa *getMahasiswaYangAkanDiinputNilai();
-
+// --- Awal deklarasi prototipe fungsi ---
 void showMenu();
-
 void eksekusiOpsiMenu(int menu);
-
 void inputDataMahasiswa();
-
+void inputNamaMatakuliah(Mahasiswa *mahasiswa);
 void inputDataNilai();
-
+Mahasiswa *getMahasiswaYangAkanDiinputNilai();
+Matakuliah *getMataKuliahYangAkanDiinputNilai(Mahasiswa *mahasiswa);
+void inputNilaiMataKuliahTertentu(Matakuliah *matakuliah);
+void hitungNilaiAkhir(Matakuliah *matakuliah);
+void tentukanStatusGrade(Matakuliah *matakuliah);
 void lihatNilaiMahasiswa();
-
-void exitProgram();
-
 Mahasiswa getMahasiswaYangAkanDilihatNilainya();
+void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa);
+void exitProgram();
+// --- Akhir deklarasi prototipe fungsi ---
+
 
 int main() {
+    int pilihanMenu;
     do{
-        int pilihanMenu;
-
         showMenu();
         scanf("%d", &pilihanMenu);
         eksekusiOpsiMenu(pilihanMenu);
@@ -120,18 +125,19 @@ void inputDataMahasiswa() {
     lastItemOfArrayMahasiswa++;
 }
 
-void inputNamaMatakuliah(Mahasiswa *ptr) {
+void inputNamaMatakuliah(Mahasiswa *mahasiswa) {
     char inputLagi;
     do{
         fflush(stdin);
-        printf("\nNama Matakuliah %d:",ptr->totalMatakuliahYangDiambil+1);
-        scanf("%[^\n]%*c", ptr->listMatakuliah[ptr->totalMatakuliahYangDiambil].namaMataKuliah);
-        fflush(stdin);
+        printf("\nNama Matakuliah %d:",mahasiswa->totalMatakuliahYangDiambil+1);
+        scanf("%[^\n]%*c", mahasiswa->listMatakuliah[mahasiswa->totalMatakuliahYangDiambil].namaMataKuliah);
 
+        mahasiswa->totalMatakuliahYangDiambil++;
+
+        fflush(stdin);
         printf("Tambah Matakuliah? (Y/N)");
-        scanf("%d", &inputLagi);
-        ptr->totalMatakuliahYangDiambil++;
-    } while (inputLagi == toupper(inputLagi));
+        scanf("%c", &inputLagi);
+    } while ('Y' == toupper(inputLagi));
 }
 
 void inputDataNilai() {
