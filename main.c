@@ -8,6 +8,7 @@
 
 /************* List of To-Do **************
  * - TODO create validation
+ * - TODO exit program implementation
  ******************************************/
 
 #include <stdio.h>
