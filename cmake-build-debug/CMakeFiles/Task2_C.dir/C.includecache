@@ -6,11 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Krisna Dhipa/Documents/GitHub/Task2_C/main.c
+/home/fadhitya/College/Apps/AlgorithmAndProgrammingTask2/main.c
 stdio.h
 -
 stdlib.h
 -
 ctype.h
+-
+string.h
 -
 

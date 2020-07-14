@@ -14,6 +14,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
+
+#define TRUE 1
+#define FALSE 0
+#define IS_SAME 0
 
 // --- Awal deklarasi tipe data komposit (struct) global ---
 typedef struct {
@@ -59,6 +64,8 @@ void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa);
 void exitProgram();
 // --- Akhir deklarasi prototipe fungsi ---
 
+
+int cekKeberadaanMahasiswa(Mahasiswa mahasiswa);
 
 int main() {
     int pilihanMenu;
@@ -111,8 +118,16 @@ void inputDataMahasiswa() {
     fflush(stdin);
     Mahasiswa mahasiswa;
     printf("\nNIM: ");
-    scanf("%[^\n]%*c", mahasiswa.nim);
-    fflush(stdin);
+
+    int sudahAda = 0;
+    do{
+        scanf("%[^\n]%*c", mahasiswa.nim);
+        fflush(stdin);
+        sudahAda = cekKeberadaanMahasiswa(mahasiswa);
+        if(sudahAda){
+            printf("\nMaaf mahasiswa tersebut sudah pernah diinput");
+        }
+    } while (sudahAda);
 
     printf("\nNama: ");
     scanf("%[^\n]%*c", mahasiswa.nama);
@@ -124,6 +139,15 @@ void inputDataMahasiswa() {
 
     arrayMahasiswa[lastItemOfArrayMahasiswa] = mahasiswa;
     lastItemOfArrayMahasiswa++;
+}
+
+int cekKeberadaanMahasiswa(Mahasiswa mahasiswa) {
+    for(int i = 0; i < lastItemOfArrayMahasiswa; i++){
+        if(strcmp(arrayMahasiswa[i].nim, mahasiswa.nim) == IS_SAME){
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 void inputNamaMatakuliah(Mahasiswa *mahasiswa) {
