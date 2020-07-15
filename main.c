@@ -4,12 +4,8 @@
  * NIM              : 2301974231                                *
  * Mata Kuliah      : Algorithm and Programming                 *
  * Nama Program     : Aplikasi Input Nilai dan Data Mahasiswa   *
+ * Compiler         : MinGW                                     *
  ****************************************************************/
-
-/************* List of To-Do **************
- * - TODO create validation
- * - TODO exit program implementation
- ******************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,10 +58,9 @@ void lihatNilaiMahasiswa();
 Mahasiswa getMahasiswaYangAkanDilihatNilainya();
 void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa);
 void exitProgram();
+int cekKeberadaanMahasiswa(Mahasiswa mahasiswa);
 // --- Akhir deklarasi prototipe fungsi ---
 
-
-int cekKeberadaanMahasiswa(Mahasiswa mahasiswa);
 
 int main() {
     int pilihanMenu;
@@ -78,12 +73,13 @@ int main() {
 
 void showMenu() {
     system("cls");
+    printf("\n================= Aplikasi Sistem Informasi Nilai ===================\n");
     printf("\nSilahkan Pilih Menu");
     printf("\n\t1. Input data Mahasiswa");
     printf("\n\t2. Input nilai Mahasiswa");
     printf("\n\t3. Lihat nilai Mahasiswa dan Status");
     printf("\n\t4. Keluar dari program");
-    printf("\nPilihan:");
+    printf("\nPilihan: ");
 }
 
 void eksekusiOpsiMenu(int menu) {
@@ -117,10 +113,10 @@ void inputDataMahasiswa() {
     system("cls");
     fflush(stdin);
     Mahasiswa mahasiswa;
-    printf("\nNIM: ");
 
     int sudahAda = 0;
     do{
+        printf("\nNIM: ");
         scanf("%[^\n]%*c", mahasiswa.nim);
         fflush(stdin);
         sudahAda = cekKeberadaanMahasiswa(mahasiswa);
@@ -134,7 +130,7 @@ void inputDataMahasiswa() {
     fflush(stdin);
 
     mahasiswa.totalMatakuliahYangDiambil=0;
-    printf("\nMatakuliah yang diikuti:");
+    printf("\nMatakuliah yang diikuti: ");
     inputNamaMatakuliah(&mahasiswa);
 
     arrayMahasiswa[lastItemOfArrayMahasiswa] = mahasiswa;
@@ -154,13 +150,13 @@ void inputNamaMatakuliah(Mahasiswa *mahasiswa) {
     char inputLagi;
     do{
         fflush(stdin);
-        printf("\nNama Matakuliah %d:",mahasiswa->totalMatakuliahYangDiambil+1);
+        printf("\nNama Matakuliah %d: ",mahasiswa->totalMatakuliahYangDiambil+1);
         scanf("%[^\n]%*c", mahasiswa->listMatakuliah[mahasiswa->totalMatakuliahYangDiambil].namaMataKuliah);
 
         mahasiswa->totalMatakuliahYangDiambil++;
 
         fflush(stdin);
-        printf("Tambah Matakuliah? (Y/N)");
+        printf("\nTambah Matakuliah? (Y/N) ");
         scanf("%c", &inputLagi);
     } while ('Y' == toupper(inputLagi));
 }
@@ -204,19 +200,19 @@ Matakuliah *getMataKuliahYangAkanDiinputNilai(Mahasiswa *mahasiswa) {
 void inputNilaiMataKuliahTertentu(Matakuliah *matakuliah) {
     system("cls");
 
-    printf("\nNilai Hadir:");
+    printf("\nNilai Hadir: ");
     scanf("%f", &matakuliah->nilaiHadir);
 
-    printf("\nNilai Tugas:");
+    printf("\nNilai Tugas: ");
     scanf("%f", &matakuliah->nilaiTugas);
 
-    printf("\nNilai Quiz:");
+    printf("\nNilai Quiz: ");
     scanf("%f", &matakuliah->nilaiQuiz);
 
-    printf("\nNilai Keaktifan Forum:");
+    printf("\nNilai Keaktifan Forum: ");
     scanf("%f", &matakuliah->nilaiForum);
 
-    printf("\nNilai UAS:");
+    printf("\nNilai UAS: ");
     scanf("%f", &matakuliah->nilaiUAS);
 }
 
@@ -246,6 +242,7 @@ void tentukanStatusGrade(Matakuliah *matakuliah) {
 void lihatNilaiMahasiswa() {
     Mahasiswa mahasiswa = getMahasiswaYangAkanDilihatNilainya();
     showNilaiMahasiswaTertentu(mahasiswa);
+    printf("\n\nKlik enter untuk kembali ke menu utama");
     char c = getchar();
 }
 
@@ -272,11 +269,11 @@ void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa) {
         printf("\n\tNilai Quiz: %.2f", mahasiswa.listMatakuliah[i].nilaiQuiz);
         printf("\n\tNilai Keaktifan Forum: %.2f", mahasiswa.listMatakuliah[i].nilaiForum);
         printf("\n\tNilai UAS: %.2f", mahasiswa.listMatakuliah[i].nilaiUAS);
-        printf("\n\tNilai Akhir: %.2f", mahasiswa.listMatakuliah[i].nilaiAkhir);
-        printf("\n\tStatus Grade: %c", mahasiswa.listMatakuliah[i].statusGrade);
+        printf("\nNilai Akhir: %.2f", mahasiswa.listMatakuliah[i].nilaiAkhir);
+        printf("\nStatus Grade: %c", mahasiswa.listMatakuliah[i].statusGrade);
     }
 }
 
 void exitProgram() {
-
+    exit(0);
 }
