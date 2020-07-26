@@ -56,6 +56,7 @@ void hitungNilaiAkhir(Matakuliah *matakuliah);
 void tentukanStatusGrade(Matakuliah *matakuliah);
 void lihatNilaiMahasiswa();
 Mahasiswa getMahasiswaYangAkanDilihatNilainya();
+Mahasiswa cariMahasiswaBerdasarkanNIM(char * nim);
 void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa);
 void exitProgram();
 int cekKeberadaanMahasiswa(Mahasiswa mahasiswa);
@@ -248,14 +249,23 @@ void lihatNilaiMahasiswa() {
 
 Mahasiswa getMahasiswaYangAkanDilihatNilainya() {
     int indexMahasiswa;
+    char inputNIM[10];
 
     for(int i=0;i<lastItemOfArrayMahasiswa;i++){
         printf("\n%d.\t%s\t%s", i+1, arrayMahasiswa[i].nim, arrayMahasiswa[i].nama);
     }
 
-    printf("\nPilih mahasiswa yang akan dimunculkan nilainya: ");
-    scanf("%d", &indexMahasiswa);
-    return arrayMahasiswa[indexMahasiswa-1];
+    printf("\nInput NIM mahasiswa yang akan dimunculkan nilainya: ");
+    scanf("%[^\n]%*c", inputNIM);
+    return cariMahasiswaBerdasarkanNIM(inputNIM);
+}
+
+Mahasiswa cariMahasiswaBerdasarkanNIM(char * nim) {
+    for (int i=0;i<lastItemOfArrayMahasiswa;i++) {
+        if (strcmp(arrayMahasiswa[i].nim, nim) == IS_SAME) {
+            return arrayMahasiswa[i];
+        }
+    }
 }
 
 void showNilaiMahasiswaTertentu(Mahasiswa mahasiswa) {
